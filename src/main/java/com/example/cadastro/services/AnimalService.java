@@ -17,6 +17,9 @@ public class AnimalService {
                 .orElseThrow(()-> new RuntimeException("Animal não Encontrado"));
         AnimalEntity pai = animalRepository.findById(Idpai)
                         .orElseThrow(()-> new  RuntimeException("Animal não encontrado"));
+        if(pai.getSexo() != 'M'){
+           throw new RuntimeException("O Touro selecionado não é um macho!");
+        }
         animal.setTouro(pai);
         return animalRepository.save(animal);
     }
@@ -25,6 +28,8 @@ public class AnimalService {
                 .orElseThrow(()-> new RuntimeException("Animal não Encontrado"));
         AnimalEntity mae = animalRepository.findById(Idmae)
                 .orElseThrow(()-> new  RuntimeException("Animal não encontrado"));
+        if(mae.getSexo() != 'F' )
+            throw new RuntimeException("O Touro selecionado não é um macho!");
         animal.setVaca(mae);
         return animalRepository.save(animal);
 }

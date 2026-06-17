@@ -1,5 +1,6 @@
 package com.example.cadastro.controllers;
 
+import com.example.cadastro.DTOs.AnimalDTOs.AnimalRequestDTO;
 import com.example.cadastro.entitys.AnimalEntity;
 import com.example.cadastro.services.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,9 @@ public class AnimalController {
         this.animalService = animalService;
     }
     @PostMapping
-    public ResponseEntity<AnimalEntity> adicionarAnimal(@RequestBody AnimalEntity animal){
-        AnimalEntity salvo = animalService.adicionarAnimal(animal);
-        return ResponseEntity.ok(salvo);
+    public String adicionarAnimal(@RequestBody AnimalRequestDTO dto){
+        animalService.adicionarAnimal(dto);
+        return "Animal criado com sucesso!";
     }
     @PutMapping("/{id}/pai/{idPai}")
     public ResponseEntity<AnimalEntity> adicionarPai(@PathVariable Long id, @PathVariable Long idPai){

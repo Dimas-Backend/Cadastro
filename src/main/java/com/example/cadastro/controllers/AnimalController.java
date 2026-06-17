@@ -21,13 +21,14 @@ public class AnimalController {
         return "Animal criado com sucesso!";
     }
     @PutMapping("/{id}/pai/{idPai}")
-    public ResponseEntity<AnimalEntity> adicionarPai(@PathVariable Long id, @PathVariable Long idPai){
-        AnimalEntity salvo = animalService.adicionarPai(id,idPai);
-        return ResponseEntity.ok(salvo);
+    public String adicionarPai(@PathVariable Long id, @PathVariable Long idPai){
+        animalService.adicionarPai(id,idPai);
+        return "Pai "+idPai + "adicionado com sucesso ao bezerro com o id: "+ id;
 }
     @PutMapping("/{id}/mae/{idMae}")
-    public ResponseEntity<AnimalEntity> adicionarMae(@PathVariable Long id, @PathVariable Long idMae){
-        AnimalEntity salvo = animalService.adicionarMae(id,idMae);
-        return ResponseEntity.ok(salvo);
+    public String adicionarMae(@PathVariable Long id, @PathVariable Long idMae){
+         animalService.adicionarMae(id,idMae);
+        return "Mãe "+idMae + "adicionada com sucesso ao bezerro com o id: "+ id;
+
 }
 }

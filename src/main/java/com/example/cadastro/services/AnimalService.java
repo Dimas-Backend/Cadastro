@@ -19,7 +19,7 @@ public class AnimalService {
 
     }
 
-    public AnimalEntity adicionarPai(Long id, Long Idpai){
+    public void adicionarPai(Long id, Long Idpai){
         AnimalEntity animal  = animalRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Animal não Encontrado"));
         AnimalEntity pai = animalRepository.findById(Idpai)
@@ -28,9 +28,9 @@ public class AnimalService {
            throw new RuntimeException("O Touro selecionado não é um macho!");
         }
         animal.setTouro(pai);
-        return animalRepository.save(animal);
+         animalRepository.save(animal);
     }
-    public AnimalEntity adicionarMae(Long id, Long Idmae){
+    public void adicionarMae(Long id, Long Idmae){
         AnimalEntity animal  = animalRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Animal não Encontrado"));
         AnimalEntity mae = animalRepository.findById(Idmae)
@@ -38,6 +38,6 @@ public class AnimalService {
         if(mae.getSexo() != 'F' )
             throw new RuntimeException("O Touro selecionado não é um macho!");
         animal.setVaca(mae);
-        return animalRepository.save(animal);
+         animalRepository.save(animal);
 }
 }

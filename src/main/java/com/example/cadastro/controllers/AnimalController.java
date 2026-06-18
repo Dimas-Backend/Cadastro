@@ -1,5 +1,6 @@
 package com.example.cadastro.controllers;
 
+import com.example.cadastro.DTOs.AnimalDTOs.AnimalIdDTO;
 import com.example.cadastro.DTOs.AnimalDTOs.AnimalRequestDTO;
 import com.example.cadastro.entitys.AnimalEntity;
 import com.example.cadastro.services.AnimalService;
@@ -21,14 +22,14 @@ public class AnimalController {
         return "Animal criado com sucesso!";
     }
     @PutMapping("/{id}/pai/{idPai}")
-    public String adicionarPai(@PathVariable Long id, @PathVariable Long idPai){
-        animalService.adicionarPai(id,idPai);
-        return "Pai "+idPai + "adicionado com sucesso ao bezerro com o id: "+ id;
+    public String adicionarPai(@PathVariable AnimalIdDTO bezerroDto, @PathVariable AnimalIdDTO paiDTO){
+        animalService.adicionarPai(bezerroDto.Id(),paiDTO.Id());
+        return "Pai "+paiDTO.Id() + "adicionado com sucesso ao bezerro com o id: "+ bezerroDto.Id();
 }
     @PutMapping("/{id}/mae/{idMae}")
-    public String adicionarMae(@PathVariable Long id, @PathVariable Long idMae){
-         animalService.adicionarMae(id,idMae);
-        return "Mãe "+idMae + "adicionada com sucesso ao bezerro com o id: "+ id;
+    public String adicionarMae(@PathVariable AnimalIdDTO bezerroDto, @PathVariable AnimalIdDTO maeDTO){
+         animalService.adicionarMae(bezerroDto.Id(), maeDTO.Id());
+        return "Mãe "+maeDTO.Id() + "adicionada com sucesso ao bezerro com o id: "+ bezerroDto.Id();
 
 }
 }

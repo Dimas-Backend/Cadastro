@@ -17,9 +17,9 @@ public class AnimalEntity {
     private Long id;
     private String raca;
     private char sexo;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name ="vacina_card_Id")
-    private VacinaCardEntity vacinaCardEntity;
+    private VacinaCardEntity vacinaCardEntity = new VacinaCardEntity();
     @ManyToOne
     @JoinColumn(name= "pai_id")
     private AnimalEntity touro;

@@ -14,7 +14,20 @@ public class AnimalService {
     public void adicionarAnimal(AnimalRequestDTO requestDTO){
          AnimalEntity animal = new AnimalEntity();
          animal.setRaca(requestDTO.raca());
-         AnimalEntity animalsalvo  = animalRepository.save(animal);
+         animal.setSexo(requestDTO.sexo());
+         if(requestDTO.paiId() != null){
+             AnimalEntity pai = animalRepository.findById(requestDTO.paiId())
+                     .orElseThrow(() -> new RuntimeException("Animal não encontrado"));
+             if(pai.getSexo() != 'M')  {throw new RuntimeException("O pai deve ser obrigatoriamente um macho!");}
+             animal.setTouro(pai);
+         }
+         if(requestDTO.maeId() != null) {
+             AnimalEntity mae = animalRepository.findById(requestDTO.maeId())
+                     .orElseThrow(() -> new RuntimeException("Animal não encontrado"));
+             if(mae.getSexo() != 'F')  {throw new RuntimeException("A mãe deve ser obrigatoriamente uma fêmea!");}
+             animal.setVaca(mae);
+         }
+          animalRepository.save(animal);
 
 
     }
@@ -40,4 +53,17 @@ public class AnimalService {
         animal.setVaca(mae);
          animalRepository.save(animal);
 }
+    public AnimalResponseDTO getAnimal(Long id){
+        AnimalEntity animal = animalRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Animal não encontrado!"));
+
+        AnimalResponseDTO responseDTO = new AnimalResponseDTO(
+                animal.getId(),
+                animal.getRaca(),
+                animal.getSexo(),
+                (animal.getTouro() != null) ? animal.getTouro().getId() : null,
+                (animal.getVaca() != null) ? animal.getVaca().getId() : null);
+        return  responseDTO;
+
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.cadastro.controllers;
 
 import com.example.cadastro.DTOs.AnimalDTOs.AnimalRequestDTO;
+import com.example.cadastro.DTOs.AnimalDTOs.AnimalResponseDTO;
 import com.example.cadastro.entitys.AnimalEntity;
 import com.example.cadastro.services.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,4 +32,10 @@ public class AnimalController {
         return "Mãe "+idMae + "adicionada com sucesso ao bezerro com o id: "+ id;
 
 }
+   @GetMapping("/{id}")
+   public ResponseEntity<AnimalResponseDTO> getAnimal(@PathVariable Long id){
+        AnimalResponseDTO response = animalService.getAnimal(id);
+        return ResponseEntity.ok(response);
+    }
+
 }

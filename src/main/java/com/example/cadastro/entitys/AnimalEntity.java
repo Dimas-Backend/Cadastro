@@ -14,8 +14,11 @@ import lombok.Setter;
 public class AnimalEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true)
     private Long id;
+    @Column(nullable = false)
     private String raca;
+    @Column(nullable = false)
     private char sexo;
     @OneToOne
     @JoinColumn(name ="vacina_card_Id")

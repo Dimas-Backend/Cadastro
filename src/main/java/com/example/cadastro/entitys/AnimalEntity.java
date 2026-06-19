@@ -20,9 +20,9 @@ public class AnimalEntity {
     private String raca;
     @Column(nullable = false)
     private char sexo;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name ="vacina_card_Id")
-    private VacinaCardEntity vacinaCardEntity;
+    private VacinaCardEntity vacinaCardEntity = new VacinaCardEntity();
     @ManyToOne
     @JoinColumn(name= "pai_id")
     private AnimalEntity touro;
